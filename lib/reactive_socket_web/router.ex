@@ -17,7 +17,7 @@ defmodule ReactiveSocketWeb.Router do
   scope "/", ReactiveSocketWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", PageController, :list
   end
 
   # Other scopes may use custom stacks.

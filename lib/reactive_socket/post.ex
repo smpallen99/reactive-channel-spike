@@ -29,7 +29,7 @@ defmodule ReactiveSocket.Post do
   end
 
   def seed(count \\ 10) do
-    fun = fn id -> %{name: "Name #{id}", description: "description #{id}"} end
-    Enum.map(1..count, &create(fun.(&1)))
+    fun = fn id -> %{title: "Title #{id}", description: "description #{id}"} end
+    Enum.map(1..count, &(create(fun.(&1)) |> elem(1)))
   end
 end
