@@ -18,3 +18,11 @@
     <% end %>
   </tbody>
 </table>
+<br />
+<button class="button" onclick="fetch()">Fetch posts</button>
+
+<script>
+function fetch () {
+  window.channel.push('subscribe:post', {})
+}
+</script>

@@ -35,7 +35,7 @@ defmodule ReactiveSocket.PostServer do
   end
 
   def handle_call({:delete, post}, _, posts) do
-    {:reply, :ok, do_delete(posts, post)}
+    {:reply, {:ok, post}, do_delete(posts, post)}
   end
 
   defp do_get(posts, id), do: Enum.find(posts, &(&1.id == id))

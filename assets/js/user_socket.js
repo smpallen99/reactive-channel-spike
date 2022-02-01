@@ -57,8 +57,23 @@ socket.connect()
 // Let's assume you have a channel with a topic named `room` and the
 // subtopic is its id - in this case 42:
 let channel = socket.channel("room:lobby", {})
+
+channel.on('change:create', resp => {
+  console.log('channel:insert', resp)
+})
+channel.on('change:delete', resp => {
+  console.log('channel:delete', resp)
+})
+channel.on('change:update', resp => {
+  console.log('channel:update', resp)
+})
+
 channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
+  .receive("ok", resp => {
+    console.log("Joined successfully", resp)
+    channel.push('subscribe:post', {})
+  })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
+window.channel = channel
 export default socket
