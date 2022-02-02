@@ -23,6 +23,9 @@
 
 <script>
 function fetch () {
-  window.channel.push('subscribe:post', {})
+  setTimeout(() => {
+    console.log('timeout...')
+    window.channel.push('subscribe:post', {})
+  }, 1000)
 }
 </script>

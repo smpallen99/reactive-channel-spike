@@ -1,5 +1,22 @@
 # ReactiveSocket
 
+## Goal
+
+The following develop "Spike" is an attempt at some helpers to make a phoenix
+channel "Reactive" for various "Models".
+
+Aside from server support, a small Javascript library is also necessary. I have
+not implemented a reusable library, so the js is hand coded for this demo.
+
+The idea is to create a reusable pattern for adding reactive models to a Phoenix
+channel.
+
+This is an alternative to LiveView since its designed to work with a Vue or React
+SPA to handle the front end.
+
+Note: To avoid ecto and database setup, this sike simulates this with a simple
+      GenServer to store the "table" in memory.
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`

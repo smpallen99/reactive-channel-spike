@@ -1,16 +1,11 @@
 defmodule ReactiveSocket.Post do
+  # , topic: inspect(__MODULE__)
+  use ReactiveSocket.Reactive.Model
+
   alias ReactiveSocket.PostServer, as: Server
 
   @derive {Jason.Encoder, only: ~w(id title description)a}
   defstruct [:id, :title, :description]
-
-  @topic "Post"
-
-  def get_topic, do: @topic
-
-  def subscribe do
-    Phoenix.PubSub.subscribe(ReactiveSocket.PubSub, @topic)
-  end
 
   def uuid, do: UUID.uuid4()
 
@@ -43,19 +38,5 @@ defmodule ReactiveSocket.Post do
   def seed(count \\ 10) do
     fun = fn id -> %{title: "Title #{id}", description: "description #{id}"} end
     Enum.map(1..count, &(create(fun.(&1)) |> elem(1)))
-  end
-
-  defp notify_subscribers({:ok, result}, event) do
-    Phoenix.PubSub.broadcast(
-      ReactiveSocket.PubSub,
-      @topic,
-      {:reactive, {__MODULE__, event, result}}
-    )
-
-    {:ok, result}
-  end
-
-  defp notify_subscribers({:error, changeset}, _) do
-    {:error, changeset}
   end
 end

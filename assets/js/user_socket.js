@@ -53,9 +53,17 @@ let socket = new Socket("/socket", { params: { token: window.userToken } })
 // Finally, connect to the socket:
 socket.connect()
 
+//////////////////////////////////
+// prototype API
+
 // Now that you are connected, you can join channels with a topic.
 // Let's assume you have a channel with a topic named `room` and the
 // subtopic is its id - in this case 42:
+
+
+// api.add('post', 'create', post => {
+//   console.log('new post', post)
+// })
 let channel = socket.channel("room:lobby", {})
 
 channel.on('change:create', resp => {
